@@ -26,7 +26,7 @@ output "mz_rds_mysql_details" {
     SELECT * FROM dummy;
 
     -- 5. (Optional) Create a new low-privileged user and grant necessary privileges:
-    -- Creating a new user
+    -- Creating a new user, make sure to replace the password
     CREATE USER 'repl_user'@'%' IDENTIFIED BY '${aws_db_instance.mz_rds_demo_db.password}';
 
     -- Granting privileges necessary for binlog replication
@@ -51,7 +51,7 @@ output "mz_rds_mysql_details" {
         HOST '${aws_db_instance.mz_rds_demo_db.address}',
         -- Or use the repl_user user created above:
         USER '${aws_db_instance.mz_rds_demo_db.username}',
-        PASSWORD SECRET mysqlpass.
+        PASSWORD SECRET mysqlpass,
         SSL MODE REQUIRED
         -- The module expects the RDS instance to be publicly accessible for testing purposes.
     );
