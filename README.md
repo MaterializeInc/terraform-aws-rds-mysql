@@ -7,6 +7,8 @@ For the manual setup, see the [Materialize + RDS](TODO) documentation.
 
 > **Warning** This is provided on a best-effort basis and Materialize cannot offer support for this module.
 
+The module has been tested with MySQL `8.0.36` and MySQL `5.7.34`.
+
 ## Requirements
 
 | Name | Version |
@@ -44,7 +46,7 @@ For the manual setup, see the [Materialize + RDS](TODO) documentation.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `string` | `"us-west-1"` | no |
-| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The engine version of the MySQL RDS instance | `string` | `"8.0.20"` | no |
+| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The engine version of the MySQL RDS instance | `string` | `"8.0.36"` | no |
 | <a name="input_mz_egress_ips"></a> [mz\_egress\_ips](#input\_mz\_egress\_ips) | List of Materialize egress IPs | `list(any)` | n/a | yes |
 | <a name="input_publicly_accessible"></a> [publicly\_accessible](#input\_publicly\_accessible) | Whether the RDS instance is publicly accessible or not | `bool` | `true` | no |
 | <a name="input_rds_instance_class"></a> [rds\_instance\_class](#input\_rds\_instance\_class) | The size of the RDS instance | `string` | `"db.m5.large"` | no |
@@ -54,6 +56,7 @@ For the manual setup, see the [Materialize + RDS](TODO) documentation.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_mz_rds_mysql_details"></a> [mz\_rds\_mysql\_details](#output\_mz\_rds\_mysql\_details) | n/a |
 | <a name="output_rds_instance"></a> [rds\_instance](#output\_rds\_instance) | n/a |
 | <a name="output_vpc"></a> [vpc](#output\_vpc) | n/a |
 <!-- END_TF_DOCS -->
