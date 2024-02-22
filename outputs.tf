@@ -25,6 +25,21 @@ output "mz_rds_mysql_details" {
     -- 4. Verify the data
     SELECT * FROM dummy;
 
+    -- 5. (Optional) Create a new low-privileged user and grant necessary privileges:
+    -- Creating a new user
+    CREATE USER 'repl_user'@'%' IDENTIFIED BY '${aws_db_instance.mz_rds_demo_db.password}';
+
+    -- Granting privileges necessary for binlog replication
+    GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT, LOCK TABLES ON *.* TO 'repl_user'@'%';
+
+    -- Require SSL for the user
+    ALTER USER 'repl_user'@'%' REQUIRE SSL;
+
+    -- If needed, disable SSL verification for the user
+    -- ALTER USER 'repl_user'@'%' REQUIRE NONE;
+    -- Apply the changes
+    FLUSH PRIVILEGES;
+
     -- On the Materialize side:
     -- 1. Ensure MySQL sources are enabled in Materialize
 
@@ -34,8 +49,10 @@ output "mz_rds_mysql_details" {
     -- 3. Create a connection to the RDS instance with an optional SSH tunnel
     CREATE CONNECTION mysql TO MYSQL (
         HOST '${aws_db_instance.mz_rds_demo_db.address}',
+        -- Or use the repl_user user created above:
         USER '${aws_db_instance.mz_rds_demo_db.username}',
-        PASSWORD SECRET mysqlpass
+        PASSWORD SECRET mysqlpass.
+        SSL MODE REQUIRED
         -- The module expects the RDS instance to be publicly accessible for testing purposes.
     );
 
