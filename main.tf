@@ -48,7 +48,8 @@ resource "random_string" "mz_rds_demo_db_password" {
 }
 
 resource "aws_db_parameter_group" "mz_rds_demo_mysql_pg" {
-  name   = "${var.rds_instance_name}-mysql"
+  name = "${var.rds_instance_name}-mysql"
+
   # If the engine version is 5.7, use the family "mysql5.7" else use "mysql8.0"
   family = substr(var.engine_version, 0, 3) == "5.7" ? "mysql5.7" : "mysql8.0"
 

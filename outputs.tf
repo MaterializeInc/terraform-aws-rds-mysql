@@ -1,5 +1,5 @@
 output "rds_instance" {
-  value = aws_db_instance.mz_rds_demo_db
+  value     = aws_db_instance.mz_rds_demo_db
   sensitive = true
 }
 
