@@ -6,7 +6,7 @@ module "my_rds_instance" {
   source = "../../"
 
   rds_instance_name   = "test-rds-mysql"
-  engine_version      = "8.0.36" # Tested with both 5.7.44 and 8.0.36
+  engine_version      = var.engine_version
   rds_instance_class  = "db.t3.micro"
   publicly_accessible = true
   mz_egress_ips       = var.mz_egress_ips

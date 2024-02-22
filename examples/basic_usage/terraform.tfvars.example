@@ -1,3 +1,4 @@
 # Example variable values for manual testing
 # Copy this file to `terraform.tfvars` and replace placeholder values with real ones
 mz_egress_ips = ["123.123.123.123/32"]
+engine_version = "5.7.44"
